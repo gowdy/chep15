@@ -125,7 +125,26 @@ shown in Figure \ref{fig:classDiag}.
 
 The batch system has a set of cores for running jobs. It also
 contains, but doesn't currently use, a internal site bandwidth which
-could further contrain the speed of jobs running at that site.
+could further constrain the speed of jobs running at that site. It
+maintains a list of jobs for each state, queued, running or done.
+
+The disk storage system is configured as an available resource. Files
+can be stored locally and use up this space. There is no tertiary data
+storage system defined.
+
+The network links to other sites are defined with inforation on the
+bandwidth of the link, the latency implicit in that link and the quality
+of the link. This information is used to determine how fast data will
+flow over the links.
+
+In addiion there is also an Event Store that is used to define
+information about files used in the system. It contains Logical File
+Name (LFN) and size of each file. It also has knowledge of which sites
+have files stored.
+
+The information defined for a job is the CPU time required to carry it
+out, the site it will run at, which LFNs it will read and what
+fraction of that data it will read (currently defined to be 100\%).
 
 \section*{References}
 \begin{thebibliography}{9}
