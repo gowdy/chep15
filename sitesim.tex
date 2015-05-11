@@ -1,5 +1,6 @@
 \documentclass[a4paper]{jpconf}
 \usepackage{graphicx}
+\usepackage{html}
 \begin{document}
 \title{Designing Computing System Architecture and Models for the HL-LHC era}
 
@@ -98,6 +99,33 @@ importance of the WAN is increased, are there specific technologies
 challenge (data volumes and I/O rates), will the ``small'' end-user
 analysis data management scale by factors of O($10^3$)?
 
+\section{Computing Model Simulation}
+
+To aid in deciding which type of model could produce the most
+efficient use of resources a simulation has been developed. The first
+results from that simulation under three different scenarios are
+described in this paper.
+
+\subsection{Description}
+
+The simulation is a event driven discrete simulation. The events are
+merely time slices. In the results reported in this paper the time
+slices are every 100 seconds.
+
+In the simulation each site is defined. A site also contains a batch
+system, a disk storage system, and a set of network links to other
+sites. The relationship between the software defined components is
+shown in Figure \ref{fig:classDiag}.
+
+\begin{figure}
+  \includegraphics[trim=100 140 100 130, clip, width=\textwidth]{figures/classDiag.pdf}
+  \caption{Software classes in the CMS Computing Model
+    Simulation\label{fig:classDiag}}
+\end{figure}
+
+The batch system has a set of cores for running jobs. It also
+contains, but doesn't currently use, a internal site bandwidth which
+could further contrain the speed of jobs running at that site.
 
 \section*{References}
 \begin{thebibliography}{9}
@@ -167,7 +195,7 @@ and Implementation, San Francisco
 
 \bibitem{ROOT} \url{http://root.cern.ch}
 
-#\bibitem{iopartnum} IOP Publishing is to grateful Mark A Caprio, Center for Theoretical Physics, Yale University, for permission to include the {\tt iopart-num} \BibTeX package (version 2.0, December 21, 2006) with  this documentation. Updates and new releases of {\tt iopart-num} can be found on \verb"www.ctan.org" (CTAN).
+%\bibitem{iopartnum} IOP Publishing is to grateful Mark A Caprio, Center for Theoretical Physics, Yale University, for permission to include the {\tt iopart-num} \BibTeX package (version 2.0, December 21, 2006) with  this documentation. Updates and new releases of {\tt iopart-num} can be found on \verb"www.ctan.org" (CTAN).
 \end{thebibliography}
 
 \end{document}
