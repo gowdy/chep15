@@ -132,12 +132,12 @@ The disk storage system is configured as an available resource. Files
 can be stored locally and use up this space. There is no tertiary data
 storage system defined.
 
-The network links to other sites are defined with inforation on the
+The network links to other sites are defined with information on the
 bandwidth of the link, the latency implicit in that link and the quality
 of the link. This information is used to determine how fast data will
 flow over the links.
 
-In addiion there is also an Event Store that is used to define
+In addition there is also an Event Store that is used to define
 information about files used in the system. It contains Logical File
 Name (LFN) and size of each file. It also has knowledge of which sites
 have files stored.
@@ -147,7 +147,18 @@ out, the site it will run at, which LFNs it will read and what
 fraction of that data it will read (currently defined to be 100\%). It
 also remembers the original wall clock time required to run the job.
 
+\subsection{Information Sources}
 
+The simuation uses current system information to setup a complex and
+realistic experiment wide computing system. Site information can be
+extracted from the CMS
+\htmladdnormallink{SiteDB}{http://cmsweb.cern.ch/sitedb/}
+service. This provides information on the resources pledged to the
+experiment for disk space and CPU power (defined in HEPSpec06). There
+is an automated tool to extract this information and format it as
+input for the simulation. In addition, when only considering the CMS
+infrastructure in the US these numbers were extracted from
+\htmladdnormallink{REBUS}{http://wlcg-rebus.cern.ch/apps/pledges/resources/}.
 
 \section*{References}
 \begin{thebibliography}{9}
