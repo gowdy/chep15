@@ -108,9 +108,10 @@ described in this paper.
 
 \subsection{Description}
 
-The simulation is a event driven discrete simulation. The events are
-merely time slices. In the results reported in this paper the time
-slices are every 100 seconds.
+The \htmladdnormallink{https://github.com/gowdy/sitesim}{simulation}
+is a event driven discrete simulation. The events are merely time
+slices. In the results reported in this paper the time slices are
+every 100 seconds.
 
 In the simulation each site is defined. A site also contains a batch
 system, a disk storage system, and a set of network links to other
@@ -155,10 +156,15 @@ extracted from the CMS
 \htmladdnormallink{SiteDB}{http://cmsweb.cern.ch/sitedb/}
 service. This provides information on the resources pledged to the
 experiment for disk space and CPU power (defined in HEPSpec06). There
-is an automated tool to extract this information and format it as
-input for the simulation. In addition, when only considering the CMS
-infrastructure in the US these numbers were extracted from
+is an automated tool to extract this information (which was the most
+recent 2014 pledges) and format it as input for the simulation. In
+addition, when only considering the CMS infrastructure in the US these
+numbers were extracted from
 \htmladdnormallink{REBUS}{http://wlcg-rebus.cern.ch/apps/pledges/resources/}.
+
+Once the sites are setup the links between them get setup then using
+information extracted by a script from
+\htmladdnormallink{PhEDEx}{http://cmsweb.cern.ch/phedex/}. 
 
 \section*{References}
 \begin{thebibliography}{9}
