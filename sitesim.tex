@@ -179,23 +179,24 @@ relatively each number to measure.
 
 \begin{table}
   \begin{center}
-    \begin{tabular}{|l|ccccccccc|}
-      \hline
-      Site & Vanderbilt & Purdue & Caltech & MIT & UCSD & Nebraska &
-      Wisconsin & Florida & FNAL \\
-      \hline
-      Vanderbilt & 0 & & & 20 & & & & & \\
-      Purdue & 40 & 0 & & & & & & & \\
-      Caltech & 100 & & 0 & & 20 & & & & \\
-      MIT & & & & 0 & & & & & \\
-      UCSD & & & & & 0 & & & & \\
-      Nebraska & & & & & & 0 & & & \\
-      Wisconsin & & & & & & & 0 & & \\
-      Florida & & & & & & & & 0 & \\
-      FNAL & & & 100 & & & & & & 0 \\
-      \hline
-    \end{tabular}
-    \caption{Link latency (ms) from (horizontal) site to (vertical) site\label{tab:latency}}
+    \begin{footnotesize}
+      \begin{tabular}{|l|rrrrrrrrr|}
+        \hline
+        Site & Purdue & UCSD & Nebraska & Wisconsin & Vanderbilt & Caltech & Florida & MIT & FNAL \\
+        \hline
+        Purdue & 0 & 100 & 100 & 60 & 40 & 100 & 40 & 40 & 70 \\
+        UCSD & 100 & 0 & 70 & 100 & 100 & 20 & 100 & 100 & 100 \\
+        Nebraska & 70 & 60 & 0 & 40 & 70 & 40 & 70 & 70 & 40 \\
+        Wisconsin & 40 & 70 & 40 & 0 & 60 & 100 & 70 & 40 & 20 \\
+        Vanderbilt & 40 & 100 & 70 & 70 & 0 & 100 & 40 & 20 & 60 \\
+        Caltech & 100 & 20 & 60 & 100 & 100 & 0 & 100 & 100 & 100 \\
+        Florida & 40 & 100 & 70 & 60 & 40 & 100 & 0 & 60 & 70 \\
+        MIT & 40 & 100 & 100 & 70 & 40 & 100 & 40 & 0 & 70 \\
+        FNAL & 40 & 100 & 40 & 20 & 70 & 100 & 70 & 60 & 0 \\
+        \hline
+      \end{tabular}
+      \caption{Link latency (ms) from (horizontal) site to (vertical) site\label{tab:latency}}
+    \end{footnotesize}
   \end{center}
 \end{table}
 
