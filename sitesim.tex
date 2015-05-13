@@ -227,14 +227,33 @@ gathered. These are tabulated in Table \ref{tab:cpuHIT}.
       Latency (ms) & CPU Efficiency Penalty (\%) \\
       \hline
       0 (ie same site) & 0 \\
-      $<=$1ms & 5 \\
-      $>$1ms & 20 \\
+      $>=$1ms & 5 \\
+      $>=$50ms & 20 \\
       \hline
     \end{tabular}
     \caption{CPU Efficiency Penalty as a function of link latency\label{tab:cpuHIT}}
   \end{center}
 \end{table}
 
+Another parameter is the maximum single file transfer rate of a given
+link. This is again based on the link latency. The standard values are
+shown in Table \ref{tab:linkLatency}.
+
+\begin{table}
+  \begin{center}
+    \begin{tabular}{|l|r|}
+      \hline
+      Latency (ms) &  Maximum Single File Transfer Speed (MB/s) \\
+      \hline
+      0 (ie same site) & 10000 \\
+      $>=$1ms & 1000 \\
+      $>=$50ms & 100 \\
+      $>=$100ms & 50 \\
+      \hline
+    \end{tabular}
+    \caption{CPU Efficiency Penalty as a function of link latency\label{tab:linkLatency}}
+  \end{center}
+\end{table}
 
 \section*{References}
 \begin{thebibliography}{9}
