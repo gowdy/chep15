@@ -108,7 +108,7 @@ described in this paper.
 
 \subsection{Description}
 
-The \htmladdnormallink{https://github.com/gowdy/sitesim}{simulation}
+The \htmladdnormallink{simulation}{https://github.com/gowdy/sitesim}
 is a event driven discrete simulation. The events are merely time
 slices. In the results reported in this paper the time slices are
 every 100 seconds.
@@ -164,7 +164,53 @@ numbers were extracted from
 
 Once the sites are setup the links between them get setup then using
 information extracted by a script from
-\htmladdnormallink{PhEDEx}{http://cmsweb.cern.ch/phedex/}. 
+\htmladdnormallink{PhEDEx}{http://cmsweb.cern.ch/phedex/}. This
+provides a list of links between the sites. Each of those links can
+have a quality associated with it. This provides information on how
+often file transfers need to be retried. In addition information on
+the actual transfer rate is available. However, this information is
+only available as an agregated number. It used as an indication of the
+bandwidth available on the link. This number is contrained to be
+between 1GB/s and 10GB/s. The other information associated with a link
+is the latency of the link. Currently this number is estimated based
+on the distance between sites. In a future update to the simulation
+this should be an relatively each number to measure.
+
+Once sites and the links between them are setup the file size and
+location information are loaded. These have also been extracted from
+PhEDEx. The list of files required is found from the list of jobs to
+be run. When considering only US locations, files that are needed but
+not present in the US are artificially given a location at Fermilab,
+the US Tier-1 site.
+
+\subsection{Simuation Parameters}
+
+There are a few distributions used as parameters of the
+simulation. These are also read from flat files but the information is
+from different sources.
+
+The first of these is the drop in CPU efficiency seen when running
+jobs that access data from a remote storage element. For example a job
+reading data at Fermilab while running at UCSD could drop from a 95\%
+efficiency to 75\% CPU efficiency. The numbers used currently are
+merely an estimate till more accurate information can be
+gathered. These are tabulated in Table \ref{tab:cpuHIT}.
+
+\begin{table}
+  \begin{center}
+    \begin{tabular}{|l|r|}
+      \hline
+      Latency (ms) & CPU Efficiency Penalty (\%) \\
+      \hline
+      0 (ie same site) & 0 \\
+      $<=$1ms & 5 \\
+      $>$1ms & 20 \\
+      \hline
+    \end{tabular}
+    \caption{CPU Efficiency Penalty as a function of link latency\label{tab:cpuHIT}}
+  \end{center}
+\end{table}
+
 
 \section*{References}
 \begin{thebibliography}{9}
