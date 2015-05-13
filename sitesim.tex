@@ -173,8 +173,31 @@ only available as an agregated number. It used as an indication of the
 bandwidth available on the link. This number is contrained to be
 between 1GB/s and 10GB/s. The other information associated with a link
 is the latency of the link. Currently this number is estimated based
-on the distance between sites. In a future update to the simulation
-this should be an relatively each number to measure.
+on the distance between sites (see Table \ref{tab:latency} for
+values). In a future update to the simulation this should be an
+relatively each number to measure.
+
+\begin{table}
+  \begin{center}
+    \begin{tabular}{|l|ccccccccc|}
+      \hline
+      Site & Vanderbilt & Purdue & Caltech & MIT & UCSD & Nebraska &
+      Wisconsin & Florida & FNAL \\
+      \hline
+      Vanderbilt & 0 & & & 20 & & & & & \\
+      Purdue & 40 & 0 & & & & & & & \\
+      Caltech & 100 & & 0 & & 20 & & & & \\
+      MIT & & & & 0 & & & & & \\
+      UCSD & & & & & 0 & & & & \\
+      Nebraska & & & & & & 0 & & & \\
+      Wisconsin & & & & & & & 0 & & \\
+      Florida & & & & & & & & 0 & \\
+      FNAL & & & 100 & & & & & & 0 \\
+      \hline
+    \end{tabular}
+    \caption{Link latency (ms) from (horizontal) site to (vertical) site\label{tab:latency}}
+  \end{center}
+\end{table}
 
 Once sites and the links between them are setup the file size and
 location information are loaded. These have also been extracted from
