@@ -10,6 +10,12 @@
 
 \ead{sgowdy+chep15@gmail.com}
 
+\author{Peter Elmer}
+
+\address{Princeton, Princeton NJ, USA}
+
+\ead{Peter.Elmer@cern.ch}
+
 \begin{abstract}
 This paper described the aims and objectives of a programme to study
 the computing model in CMS after the next long shutdown near the end
@@ -262,6 +268,45 @@ sample set. A distribution is dirived from them, which is also binned
 by CPU time as it is observed that shorter jobs can have a much worse
 CPU efficiecny than longer jobs. There are 100 CPU efficiency bins and
 10 CPU time bins in the distribution.
+
+\section{Scenarios}
+
+In each case the CMS computing system in the US is used. This consists
+of one Tier-1 site (FNAL) and eight Tier-2 sites. Figure \ref{fig:map}
+shows the location of these sites together with the resources
+available there today according to REBUS.
+
+\begin{figure}
+  \includegraphics[trim=80 90 80 90, clip, width=\textwidth]{figures/map.pdf}
+  \caption{Sites used in the simulation\label{fig:map}}
+\end{figure}
+
+\subsection{Data preplaced at sites}
+
+In this scanerio data is already mostly preplaced at the site where
+the job will execute. This is the situation today where bulk data
+transfers are done using PhEDEx and in the vast majority of cases data
+is already at a site before the job starts running. In the simulation
+there are some jobs which do access remote data. In addition there
+were some jobs where the data read wasn't present anywhere in the
+US. In this latter case a copy of the data was placed at FNAL to allow
+them to run.
+
+\subsection{Data Replication}
+
+With this scanerio data is replicated to sites as the job starts. This
+introduces a small inefficiency, depending on how long the job would
+run. In this case all data is placed at FNAL and every job run outside
+FNAL would the data it requires, except in the case where an earlier
+job had already used the data in question. Copies are cached at sites
+in this scanerio.
+
+\subsection{Remote Reading}
+
+In this scenario all data is located at FNAL and no where else. Each
+job must read over the network to access its data. In this scenario
+there is no disk space required at the Tier-2s.
+
 
 \section*{References}
 \begin{thebibliography}{9}
