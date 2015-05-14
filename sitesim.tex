@@ -251,9 +251,17 @@ shown in Table \ref{tab:linkLatency}.
       $>=$100ms & 50 \\
       \hline
     \end{tabular}
-    \caption{CPU Efficiency Penalty as a function of link latency\label{tab:linkLatency}}
+    \caption{CPU Efficiency Penalty as a function of link
+      latency\label{tab:linkLatency}}
   \end{center}
 \end{table}
+
+The last set of parameters used is to Monte-Carlo the CPU efficiency
+of jobs. A set of jobs run in September of last year is used as the
+sample set. A distribution is dirived from them, which is also binned
+by CPU time as it is observed that shorter jobs can have a much worse
+CPU efficiecny than longer jobs. There are 100 CPU efficiency bins and
+10 CPU time bins in the distribution.
 
 \section*{References}
 \begin{thebibliography}{9}
