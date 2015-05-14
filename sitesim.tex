@@ -281,7 +281,7 @@ available there today according to REBUS.
   \caption{Sites used in the simulation\label{fig:map}}
 \end{figure}
 
-\subsection{Data preplaced at sites}
+\subsection{Data preplaced at sites\label{sec:today}}
 
 In this scanerio data is already mostly preplaced at the site where
 the job will execute. This is the situation today where bulk data
@@ -306,6 +306,16 @@ in this scanerio.
 In this scenario all data is located at FNAL and no where else. Each
 job must read over the network to access its data. In this scenario
 there is no disk space required at the Tier-2s.
+
+\section{Execution}
+
+When execution begins all jobs are read in. For the results presented
+56949 jobs were extracted from the dashboard, as run in February
+2015. To provide a more even distribution of jobs across the
+infrastucture each job was duplicated and ran at another site. For the
+first scenario described in Section \ref{sec:today} the data was also
+duplicated with the job.
+
 
 
 \section*{References}
