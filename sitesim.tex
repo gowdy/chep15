@@ -157,7 +157,7 @@ also remembers the original wall clock time required to run the job.
 
 \subsection{Information Sources}
 
-The simuation uses current system information to setup a complex and
+The simulation uses current system information to setup a complex and
 realistic experiment wide computing system. Site information can be
 extracted from the CMS
 \htmladdnormallink{SiteDB}{http://cmsweb.cern.ch/sitedb/}
@@ -176,8 +176,8 @@ provides a list of links between the sites. Each of those links can
 have a quality associated with it. This provides information on how
 often file transfers need to be retried. In addition information on
 the actual transfer rate is available. However, this information is
-only available as an agregated number. It used as an indication of the
-bandwidth available on the link. This number is contrained to be
+only available as an aggregated number. It used as an indication of the
+bandwidth available on the link. This number is constrained to be
 between 1GB/s and 10GB/s. The other information associated with a link
 is the latency of the link. Currently this number is estimated based
 on the distance between sites (see Table \ref{tab:latency} for
@@ -214,7 +214,7 @@ be run. When considering only US locations, files that are needed but
 not present in the US are artificially given a location at Fermilab,
 the US Tier-1 site.
 
-\subsection{Simuation Parameters}
+\subsection{Simulation Parameters}
 
 There are a few distributions used as parameters of the
 simulation. These are also read from flat files but the information is
@@ -265,9 +265,9 @@ shown in Table \ref{tab:linkLatency}.
 
 The last set of parameters used is to Monte-Carlo the CPU efficiency
 of jobs. A set of jobs run in September of last year is used as the
-sample set. A distribution is dirived from them, which is also binned
+sample set. A distribution is derived from them, which is also binned
 by CPU time as it is observed that shorter jobs can have a much worse
-CPU efficiecny than longer jobs. There are 100 CPU efficiency bins and
+CPU efficiency than longer jobs. There are 100 CPU efficiency bins and
 10 CPU time bins in the distribution.
 
 \section{Scenarios}
@@ -284,7 +284,7 @@ available there today according to REBUS.
 
 \subsection{Data preplaced at sites\label{sec:today}}
 
-In this scanerio data is already mostly preplaced at the site where
+In this scenario data is already mostly preplaced at the site where
 the job will execute. This is the situation today where bulk data
 transfers are done using PhEDEx and in the vast majority of cases data
 is already at a site before the job starts running. In the simulation
@@ -295,12 +295,12 @@ them to run.
 
 \subsection{Data Replication}
 
-With this scanerio data is replicated to sites as the job starts. This
+With this scenario data is replicated to sites as the job starts. This
 introduces a small inefficiency, depending on how long the job would
 run. In this case all data is placed at FNAL and every job run outside
 FNAL would the data it requires, except in the case where an earlier
 job had already used the data in question. Copies are cached at sites
-in this scanerio.
+in this scenario.
 
 \subsection{Remote Reading}
 
@@ -313,7 +313,7 @@ there is no disk space required at the Tier-2s.
 When execution begins all jobs are read in. For the results presented
 56949 jobs were extracted from the dashboard, as run during a week in
 February 2015. To provide a more even distribution of jobs across the
-infrastucture each job was duplicated and for the Tier-2 based jobs,
+infrastructure each job was duplicated and for the Tier-2 based jobs,
 ran at another site. For the first scenario described in Section
 \ref{sec:today} the data was also duplicated with the job. The input
 information for the job is the CPU time required, the site to run it
@@ -325,14 +325,14 @@ Each site is then polled to start any jobs it has capacity to
 start. Then data transfers are constrained for those jobs, this is
 needed to determine the run time of the job. Jobs are also checked to
 see if they've finished since the last poll. This may also some
-transfers to complete sooner, and hense the jobs that depend on them.
+transfers to complete sooner, and hence the jobs that depend on them.
 
-Each job has the CPU efficiency Monto-Carlo run for it to determine an
+Each job has the CPU efficiency Monte-Carlo run for it to determine an
 first order wall clock time. This can be further extended if data
 movement is required for the job. A site to site transfer would add a
-fixed amount of time. A remote read will add a CPU Efficiency penatly
+fixed amount of time. A remote read will add a CPU Efficiency penalty
 while it is being read. The simulation takes account of bad quality
-links while transfering files and has a mechanism to generate retries,
+links while transferring files and has a mechanism to generate retries,
 and will eventually give up if too many retries occur. It would then
 locate another copy of the file to use. Once the job does complete
 there is a total wall clock time recorded for the job.
@@ -342,7 +342,7 @@ there is a total wall clock time recorded for the job.
 \subsection{Total Wall Clock Time}
 
 We can use the total wall clock time required to run all the jobs in
-each of the scenarios to make a comparision. Table \ref{tab:wallClock}
+each of the scenarios to make a comparison. Table \ref{tab:wallClock}
 shows these total wall clock time for the three scenarios. It also
 shows the results if we vary the simulation parameters by a factor of
 two in each direction.
@@ -434,11 +434,11 @@ for each of the nine sets of input parameters.
 
 The simulation can show us what can happen in different scenarios. As
 is shown with the situations studied in this paper alternative
-staratgies don't produce results quicker, however, there could be
-significant savings in cost and maintence of disk space at Tier-2
+strategies don't produce results quicker, however, there could be
+significant savings in cost and maintenance of disk space at Tier-2
 sites, which could allow purchase of more CPU resources to offset the
 extra wall clock time required. Once a more accurate set of simulation
-paramters has been determines quantiative comparisions can be made.
+parameters has been determines quantitative comparisons can be made.
 
 \section*{References}
 \begin{thebibliography}{9}
