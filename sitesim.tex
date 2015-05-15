@@ -1,6 +1,7 @@
 \documentclass[a4paper]{jpconf}
 \usepackage{graphicx}
 \usepackage{html}
+\usepackage{subcaption}
 \begin{document}
 \title{Designing Computing System Architecture and Models for the HL-LHC era}
 
@@ -310,11 +311,124 @@ there is no disk space required at the Tier-2s.
 \section{Execution}
 
 When execution begins all jobs are read in. For the results presented
-56949 jobs were extracted from the dashboard, as run in February
-2015. To provide a more even distribution of jobs across the
-infrastucture each job was duplicated and ran at another site. For the
-first scenario described in Section \ref{sec:today} the data was also
-duplicated with the job.
+56949 jobs were extracted from the dashboard, as run during a week in
+February 2015. To provide a more even distribution of jobs across the
+infrastucture each job was duplicated and for the Tier-2 based jobs,
+ran at another site. For the first scenario described in Section
+\ref{sec:today} the data was also duplicated with the job. The input
+information for the job is the CPU time required, the site to run it
+at, the files to read and what fraction of the data is read (currently
+always 100\%). The jobs are added to the queue at the sites they are
+to be run at.
+
+Each site is then polled to start any jobs it has capacity to
+start. Then data transfers are constrained for those jobs, this is
+needed to determine the run time of the job. Jobs are also checked to
+see if they've finished since the last poll. This may also some
+transfers to complete sooner, and hense the jobs that depend on them.
+
+Each job has the CPU efficiency Monto-Carlo run for it to determine an
+first order wall clock time. This can be further extended if data
+movement is required for the job. A site to site transfer would add a
+fixed amount of time. A remote read will add a CPU Efficiency penatly
+while it is being read. The simulation takes account of bad quality
+links while transfering files and has a mechanism to generate retries,
+and will eventually give up if too many retries occur. It would then
+locate another copy of the file to use. Once the job does complete
+there is a total wall clock time recorded for the job.
+
+\section{Total Wall Clock Time}
+
+We can use the total wall clock time required to run all the jobs in
+each of the scenarios to make a comparision. Table \ref{tab:wallClock}
+shows these total wall clock time for the three scenarios. It also
+shows the results if we vary the simulation parameters by a factor of
+two in each direction.
+
+
+\begin{table}
+  \begin{center}
+    \begin{scriptsize}
+      \begin{tabular}{|l|rrr|rrr|rrr|}
+        \hline
+        & \multicolumn{3}{|c|}{Half CPU Hit} & \multicolumn{3}{|c|}{Normal CPU
+          Hit} & \multicolumn{3}{|c|}{Double CPU Hit} \\
+        \cline{2-10}
+        & Preplaced & Copy & Remote & Preplaced & Copy & Remote
+        & Preplaced & Copy & Remote \\
+        \hline
+        Half Max Speed & 2.77 & 3.32 & 3.78 & 2.77 & 3.32 & 3.94 & 2.77
+        & 3.32 & 4.25 \\
+        Normal Max Speed & 2.77 & 3.32 & 3.78 & 2.77 & 3.32 & 3.94 & 2.77
+        & 3.32 & 4.25 \\
+        Double Max Speed & 2.77 & 3.32 & 3.78 & 2.77 & 3.32 & 3.94 & 2.77
+        & 3.32 & 4.25 \\
+        \hline
+      \end{tabular}
+      \caption{Total wall clock time of all jobs in billions of seconds\label{tab:wallClock}}
+    \end{scriptsize}
+  \end{center}
+\end{table}
+
+There is a very small difference in the Transfer File time with the
+change in maximum single file transfer speed. This isn't evident as it
+is only apparent beyond the first three significant figures.
+
+You can see that in each set of parameters that not preplacing the
+data costs almost 20\% more wall clock time to be used. The penalty
+for doing remote reads varies from 36\% up to 53\%, depending on the
+actual set of remote read parameters used. The simulation is more
+sensitive to this parameter.
+
+\section{Job Queued During Simulation}
+
+While the simulation is running the state of each of the job lists at
+the sites is monitored. We can graph these to see the progression of
+jobs through the system. Figure \ref{fig:jobQueues} shows these queues
+for each of the nine sets of input parameters.
+
+\begin{figure}
+  \centering
+  \begin{subfigure}{0.3\textwidth}
+    \includegraphics[width=\textwidth]{figures/FM1_RM1CPU.png}
+    \caption{Half CPU/Half Tran}
+  \end{subfigure}
+  \begin{subfigure}{0.3\textwidth}
+    \includegraphics[width=\textwidth]{figures/FM1_RP0CPU.png}
+    \caption{Normal CPU/Half Tran}
+  \end{subfigure}
+  \begin{subfigure}{0.3\textwidth}
+    \includegraphics[width=\textwidth]{figures/FM1_RP1CPU.png}
+    \caption{Double CPU/Half Tran}
+  \end{subfigure}
+  \begin{subfigure}{0.3\textwidth}
+    \includegraphics[width=\textwidth]{figures/FP0_RM1CPU.png}
+    \caption{Half CPU/Normal Tran}
+  \end{subfigure}
+  \begin{subfigure}{0.3\textwidth}
+    \includegraphics[width=\textwidth]{figures/FP0_RP0CPU.png}
+    \caption{Normal CPU/Normal Tran}
+  \end{subfigure}
+  \begin{subfigure}{0.3\textwidth}
+    \includegraphics[width=\textwidth]{figures/FP0_RP1CPU.png}
+    \caption{Double CPU/Normal Tran}
+  \end{subfigure}
+  \begin{subfigure}{0.3\textwidth}
+    \includegraphics[width=\textwidth]{figures/FP1_RM1CPU.png}
+    \caption{Half CPU/Double Tran}
+  \end{subfigure}
+  \begin{subfigure}{0.3\textwidth}
+    \includegraphics[width=\textwidth]{figures/FP1_RP0CPU.png}
+    \caption{Normal CPU/Double Tran}
+  \end{subfigure}
+  \begin{subfigure}{0.3\textwidth}
+    \includegraphics[width=\textwidth]{figures/FP1_RP1CPU.png}
+    \caption{Double CPU/Double Tran}
+  \end{subfigure}
+  \caption{Sum of job queues at all sites\label{fig:jobQueues}}
+\end{figure}
+
+
 
 
 
