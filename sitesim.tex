@@ -430,6 +430,72 @@ for each of the nine sets of input parameters.
   \caption{Sum of job queues at all sites\label{fig:jobQueues}}
 \end{figure}
 
+\section{Network Usage}
+
+Another observation from the simulation is the network bandwidth used
+in each case. Each of the scenarios has been studied with varying the
+input parameters. The variation is in line wish expectations and only
+the ``normal'' parameter set will be shown for each of the scenarios.
+
+In Figure \ref{fig:fnalOut} you are able to see the network out of
+FNAL to each of the Tier-2 sites. As expected when data is preplaced
+(Figure \ref{fig:fnalOutToday}) at the Tier-2 sites the network used
+is very minimal. If data is copied (Figure \ref{fig:fnalOutCopy}) the
+network usage is more uneven as the transfers happen as quickly as
+possible. Whereas when data is read remotely (Figure
+\ref{fig:fnalOutRemote}) data is only consumed at the speed of the job
+on the Tier-2 site.
+
+\begin{figure}
+  \centering
+  \begin{subfigure}{0.3\textwidth}
+    \includegraphics[width=\textwidth]{figures/T_FP0_RP0Data.png}
+    \caption{Preplaced Data\label{fig:fnalOutToday}}
+  \end{subfigure}
+  \begin{subfigure}{0.3\textwidth}
+    \includegraphics[width=\textwidth]{figures/S_FP0_RP0Data.png}
+    \caption{Data Copied\label{fig:fnalOutCopy}}
+  \end{subfigure}
+  \begin{subfigure}{0.3\textwidth}
+    \includegraphics[width=\textwidth]{figures/F_FP0_RP0Data.png}
+    \caption{Remote Read\label{fig:fnalOutRemote}}
+  \end{subfigure}
+  \caption{Bandwidth used out of FNAL\label{fig:fnalOut}}
+\end{figure}
+
+The network load between the Tier-2 sites was also examined. The total
+Tier-2 to Tier-2 bandwidth used is show in figure \ref{fig:tier2},
+again only the ``normal'' parameter set is shown. For the case when
+the majority of the data is preplaced (Figure \ref{fig:tier2Today}) at
+the job execution site there is very little Tier-2 to Tier-2
+activity. The small amount of data transferred will be for those jobs
+which ran at a site which didn't have the data locally but was
+available from another Tier-2 which was ``nearer'' than FNAL. For the
+case when the data was copied from FNAL (Figure \ref{fig:tier2Copy})
+the larger proportion at the end will be data duplicated from FNAL to
+the Tier-2 sites, which then represented a better replica that the
+original copy at FNAL for a later job ran at another Tier-2 site. For
+the case when data is always read from FNAL (Figure
+\ref{fig:tier2Remote}) there are no replicas made at Tier-2s, so there
+is no Tier-2 to Tier-2 data transfers.
+
+\begin{figure}
+  \centering
+  \begin{subfigure}{0.3\textwidth}
+    \includegraphics[width=\textwidth]{figures/T_FP0_RP0DataT2.png}
+    \caption{Preplaced Data\label{fig:tier2Today}}
+  \end{subfigure}
+  \begin{subfigure}{0.3\textwidth}
+    \includegraphics[width=\textwidth]{figures/S_FP0_RP0DataT2.png}
+    \caption{Data Copied\label{fig:tier2Copy}}
+  \end{subfigure}
+  \begin{subfigure}{0.3\textwidth}
+    \includegraphics[width=\textwidth]{figures/F_FP0_RP0DataT2.png}
+    \caption{Remote Read\label{fig:tier2Remote}}
+  \end{subfigure}
+  \caption{Bandwidth used between Tier-2 sites\label{fig:tier2}}
+\end{figure}
+
 \section{Conclusions}
 
 The simulation can show us what can happen in different scenarios. As
