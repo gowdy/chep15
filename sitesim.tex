@@ -26,30 +26,30 @@ the next long shutdown near the end of the decade.
 \section{Introduction}
 
 One of the recurring challenges for HEP computing in recent years
-has been data management, access and organization when using
+has been data management, access and organisation when using
 distributed computing resources.  The computing model chosen by CMS
 for the LHC startup used a distributed data management
 architecture~\cite{CMSCTDR} which placed datasets statically at
 sites. Dataset replicas in multiple sites were made manually as
 required, and jobs were sent to sites where their input data could
 be read from site-local storage.  In the first years of the Worldwide
-LHC Computing Grid (WLCG) many of the computer centers were new and
+LHC Computing Grid (WLCG) many of the computer centres were new and
 not yet operating at full reliability. The static placement strategy
-minimized dependencies between centers and allowed for efficient
+minimised dependencies between centres and allowed for efficient
 and scalable commissioning of the resources.  It had however the
 disadvantage of requiring significantly more storage than strictly
 necessary due to the dataset replication. The wide area network
-(WAN) was also underutilized as a resource, despite being significantly
+(WAN) was also underutilised as a resource, despite being significantly
 more robust than originally imagined.
 
-The reliability of all WLCG computer centers has greatly improved
+The reliability of all WLCG computer centres has greatly improved
 through the experience gained during LHC Run 1. More sophisticated
 data management and access models are thus possible. A first step
 in this direction is well underway. Via the NSF-funded ``Any Data,
 Any Time, Anywhere'' (AAA) project, US-CMS currently leads an effort
 to deploy a worldwide data federation~\cite{AAACHEP13}.  %based on
 the xrootd data access system~\cite{XROOTD1}.  Via the data federation
-an application running in one center can open a file for reading,
+an application running in one centre can open a file for reading,
 and the system will find and allow remote reads from a copy of the
 file wherever it is located in the world. Efficient remote access
 to data removes compute and storage locality requirements, and
@@ -83,7 +83,7 @@ dynamic data management.
 
 Together these factors imply that HL-LHC (and perhaps Run 3) will
 require larger, potentially non-evolutionary, changes to the
-experiment's computing model, data management, access and organization.
+experiment's computing model, data management, access and organisation.
 To that end, a number of ideas and research questions have arisen
 in the community: Can the architectures and algorithms used for
 caching and to reduce latencies in Content Delivery Networks be
@@ -93,9 +93,9 @@ Drive, DropBox) to evolve the existing data federation into a
 cost-effective, high performance global storage cloud for physics?
 Can application architectures such as Map-Reduce~\cite{MAPREDUCE}
 be integrated in the large into HEP computing models and what data
-management and organization strategies would make it most effective?
+management and organisation strategies would make it most effective?
 Today ``external'' entities monitor overall performance and act to
-optimize the system. Can performance-aware software applications
+optimise the system. Can performance-aware software applications
 adapt or work with the data access layer when performance is too
 low? Can CMS adapt its data model and software to simplify the
 problem, for example by a more dynamic definition and selection of
@@ -382,7 +382,70 @@ for doing remote reads varies from 36\% up to 53\%, depending on the
 actual set of remote read parameters used. The simulation is more
 sensitive to this parameter.
 
-\subsection{Job Queued During Simulation}
+\subsection{CPU Efficiency}
+
+The latencies and penalties that jobs are exposed to cause their CPU
+efficiency to drop. In the different scenarios we can see a slightly
+different behaviour. We can see various CPU Efficiency distributions in
+Figure \ref{fig:cpuEff}.
+
+The distribution in Figure \ref{fig:cpuEffToday} shows the case where
+data is preplaced at sites. There is very little change if the remote
+read penalty or the maximum file transfer speed is varied. The average
+CPU efficiency in this case is 84.5\%.
+
+In Figures \ref{fig:cpuEffCopyH}-\ref{fig:cpuEffCopyD} you can see the
+effect on the CPU efficiency when the maximum file transfer rate is
+first halved, normal and then doubled. The effect is small, and the
+average number varies from 76.1\% up to 76.4\%.
+
+In the case of reading the data remotely there is a much larger
+variation. This can be seen in Figures
+\ref{fig:cpuEffRemoteH}-\ref{fig:cpuEffRemoteD}. Here the average
+varies from 68.3\% down to 61.6\%. You can also see the artificial
+nature of the imposed penalty producing a two peak structure. As the
+penalty increases it moves the set of jobs with a lower penalty out of
+those jobs run at FNAL, which have no penalty, producing three peaks.
+
+\begin{figure}
+  \begin{center}
+    \hspace{2.7cm}
+    \begin{subfigure}{0.3\textwidth}
+      \includegraphics[width=\textwidth]{figures/T_FP0_RP0CPUEff.png}
+      \caption{Preplaced Data\label{fig:cpuEffToday}}
+    \end{subfigure}
+    \newline
+    \begin{subfigure}{0.3\textwidth}
+      \includegraphics[width=\textwidth]{figures/S_FM1_RP0CPUEff.png}
+      \caption{Copy: Half Rate\label{fig:cpuEffCopyH}}
+    \end{subfigure}
+    \begin{subfigure}{0.3\textwidth}
+      \includegraphics[width=\textwidth]{figures/S_FP0_RP0CPUEff.png}
+      \caption{Copy: Normal Rate\label{fig:cpuEffCopyN}}
+    \end{subfigure}
+    \begin{subfigure}{0.3\textwidth}
+      \includegraphics[width=\textwidth]{figures/S_FP1_RP0CPUEff.png}
+      \caption{Copy: Double Rate\label{fig:cpuEffCopyD}}
+    \end{subfigure}
+    \begin{subfigure}{0.3\textwidth}
+      \includegraphics[width=\textwidth]{figures/F_FP0_RM1CPUEff.png}
+      \caption{Remote: Half Penalty\label{fig:cpuEffRemoteH}}
+    \end{subfigure}
+    \begin{subfigure}{0.3\textwidth}
+      \includegraphics[width=\textwidth]{figures/F_FP0_RP0CPUEff.png}
+      \caption{Remote: Normal Penalty\label{fig:cpuEffRemoteN}}
+    \end{subfigure}
+    \begin{subfigure}{0.3\textwidth}
+      \includegraphics[width=\textwidth]{figures/F_FP0_RP1CPUEff.png}
+      \caption{Remote: Double Penalty\label{fig:cpuEffRemoteD}}
+    \end{subfigure}
+    \caption{Distribution of CPU Efficiency across all
+      jobs\label{fig:cpuEff}}
+  \end{center}
+\end{figure}
+
+
+\subsection{Job Queues During Simulation}
 
 While the simulation is running the state of each of the job lists at
 the sites is monitored. We can graph these to see the progression of
@@ -430,7 +493,7 @@ for each of the nine sets of input parameters.
   \caption{Sum of job queues at all sites\label{fig:jobQueues}}
 \end{figure}
 
-\section{Network Usage}
+\subsection{Network Usage}
 
 Another observation from the simulation is the network bandwidth used
 in each case. Each of the scenarios has been studied with varying the
