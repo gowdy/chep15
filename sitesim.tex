@@ -108,9 +108,9 @@ of the link. This information is used to determine how fast data will
 flow over the links.
 
 In addition there is also an Event Store that is used to define
-information about files used in the system. It contains Logical File
-Name (LFN) and size of each file. It also has knowledge of which sites
-have files stored.
+information about files used in the system. It contains the Logical
+File Name (LFN) and the size of each file. It also has knowledge of
+which sites have the files stored.
 
 The information defined for a job is the CPU time required to carry it
 out, the site it will run at, which LFNs it will read and what
@@ -138,13 +138,13 @@ provides a list of links between the sites. Each of those links can
 have a quality associated with it. This provides information on how
 often file transfers need to be retried. In addition information on
 the actual transfer rate is available. However, this information is
-only available as an aggregated number. It used as an indication of the
-bandwidth available on the link. This number is constrained to be
+only available as an aggregated number. It used as an indication of
+the bandwidth available on the link. This number is constrained to be
 between 1GB/s and 10GB/s. The other information associated with a link
 is the latency of the link. Currently this number is estimated based
-on the distance between sites (see Table \ref{tab:latency} for
-values). In a future update to the simulation this should be an
-relatively each number to measure.
+on the distance between sites (see Table \ref{tab:latency} for the
+values used). In a future update to the simulation this should be an
+relatively easy number to measure.
 
 \begin{table}
   \begin{center}
@@ -260,13 +260,13 @@ them to run.
 With this scenario data is replicated to sites as the job starts. This
 introduces a small inefficiency, depending on how long the job would
 run. In this case all data is placed at FNAL and every job run outside
-FNAL would the data it requires, except in the case where an earlier
-job had already used the data in question. Copies are cached at sites
-in this scenario.
+FNAL would copy the data it requires, except in the case where an
+earlier job had already used the data in question. Copies are cached
+at sites in this scenario.
 
 \subsection{Remote Reading}
 
-In this scenario all data is located at FNAL and no where else. Each
+In this scenario all data is located at FNAL and nowhere else. Each
 job must read over the network to access its data. In this scenario
 there is no disk space required at the Tier-2s.
 
@@ -277,27 +277,26 @@ When execution begins all jobs are read in. For the results presented
 February 2015. To provide a more even distribution of jobs across the
 infrastructure each job was duplicated and for the Tier-2 based jobs,
 ran at another site. For the first scenario described in Section
-\ref{sec:today} the data was also duplicated with the job. The input
-information for the job is the CPU time required, the site to run it
-at, the files to read and what fraction of the data is read (currently
-always 100\%). The jobs are added to the queue at the sites they are
-to be run at.
+\ref{sec:today} the data was also duplicated with the job. The jobs
+are added to the queue at the sites they are to be run at.
 
 Each site is then polled to start any jobs it has capacity to
 start. Then data transfers are constrained for those jobs, this is
 needed to determine the run time of the job. Jobs are also checked to
-see if they've finished since the last poll. This may also some
+see if they've finished since the last poll. This may allow some
 transfers to complete sooner, and hence the jobs that depend on them.
 
-Each job has the CPU efficiency Monte-Carlo run for it to determine an
+Each job has the CPU efficiency Monte-Carlo run for it to determine a
 first order wall clock time. This can be further extended if data
 movement is required for the job. A site to site transfer would add a
 fixed amount of time. A remote read will add a CPU Efficiency penalty
-while it is being read. The simulation takes account of bad quality
-links while transferring files and has a mechanism to generate retries,
-and will eventually give up if too many retries occur. It would then
-locate another copy of the file to use. Once the job does complete
-there is a total wall clock time recorded for the job.
+while that file is being read. The CPU time of the job is shared
+between the files based on the size of the file. The simulation takes
+account of bad quality links while transferring files and has a
+mechanism to generate retries, and will eventually give up if too many
+retries occur. It would then locate another copy of the file to
+use. Once the job does complete there is a total wall clock time
+recorded for the job.
 
 \section{Results}
 
@@ -459,7 +458,7 @@ for each of the nine sets of input parameters.
 
 Another observation from the simulation is the network bandwidth used
 in each case. Each of the scenarios has been studied with varying the
-input parameters. The variation is in line wish expectations and only
+input parameters. The variation is in line with expectations and only
 the ``normal'' parameter set will be shown for each of the scenarios.
 
 In Figure \ref{fig:fnalOut} you are able to see the network out of
