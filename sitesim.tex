@@ -25,41 +25,25 @@ the next long shutdown near the end of the decade.
 
 \section{Introduction}
 
-One of the recurring challenges for HEP computing in recent years
-has been data management, access and organisation when using
-distributed computing resources.  The computing model chosen by CMS
-for the LHC startup used a distributed data management
-architecture~\cite{CMSCTDR} which placed datasets statically at
-sites. Dataset replicas in multiple sites were made manually as
-required, and jobs were sent to sites where their input data could
-be read from site-local storage.  In the first years of the Worldwide
-LHC Computing Grid (WLCG) many of the computer centres were new and
-not yet operating at full reliability. The static placement strategy
-minimised dependencies between centres and allowed for efficient
-and scalable commissioning of the resources.  It had however the
-disadvantage of requiring significantly more storage than strictly
-necessary due to the dataset replication. The wide area network
-(WAN) was also underutilised as a resource, despite being significantly
-more robust than originally imagined.
+One of the recurring challenges for HEP computing in recent years has
+been data management, access and organisation when using distributed
+computing resources.  The computing model chosen by CMS for the LHC
+startup used a distributed data management architecture~\cite{CMSCTDR}
+which placed datasets statically at sites. Dataset replicas in
+multiple sites were made manually as required, and jobs were sent to
+sites where their input data could be read from site-local storage.
+The wide area network (WAN) was underutilised as a resource, despite
+being significantly more robust than originally imagined.
 
 The reliability of all WLCG computer centres has greatly improved
 through the experience gained during LHC Run 1. More sophisticated
-data management and access models are thus possible. A first step
-in this direction is well underway. Via the NSF-funded ``Any Data,
-Any Time, Anywhere'' (AAA) project, US-CMS currently leads an effort
-to deploy a worldwide data federation~\cite{AAACHEP13}.  %based on
-the xrootd data access system~\cite{XROOTD1}.  Via the data federation
-an application running in one centre can open a file for reading,
-and the system will find and allow remote reads from a copy of the
-file wherever it is located in the world. Efficient remote access
-to data removes compute and storage locality requirements, and
-permits reduction of extra storage costs resulting from dataset
-replications.  The use of ``opportunistic'' compute resources also
-becomes much easier, as they can be used without requiring local
-data storage.  For LHC Run 2 CMS is deploying additional technologies
-to monitor dataset popularity and use PhEDEx~\cite{PHEDEX} to remove
-unnecessary dataset replications. These evolutionary changes will
-allow effective data management and access through Run 2.
+data management and access models are thus possible. The use of
+``opportunistic'' compute resources also becomes much easier, as they
+can be used without requiring local data storage.  For LHC Run 2 CMS
+is deploying additional technologies to monitor dataset popularity and
+use PhEDEx~\cite{PHEDEX} to remove unnecessary dataset
+replications. These evolutionary changes will allow effective data
+management and access through Run 2.
 
 \section{Data Management at the HL-LHC}
 Planning is currently underway for a High Luminosity Large Hadron
@@ -69,19 +53,7 @@ in energy for Run 2, and expectations for evolving pile-up and
 trigger rate through Run 3 and HL-LHC, the data volume increase
 over the next 15 years will be O($10^3$).
 
-Storage technologies are also evolving~\cite{SMSTORAGE}.  Disk size
-growth per unit cost appears to be slowing. Access rates per unit
-cost are stagnant and it isn't yet clear that the cost of SSD's
-will drop enough to be a cost-effective replacement for disks at
-very high storage volumes. Tape will however remain relatively
-cheap. Simultaneously processor technology evolution towards
-multi-core and many-core technologies~\cite{SMPROC} could change
-significantly the I/O requirements of individual jobs. Trends towards
-the use of diverse cloud-provisioned compute and storage
-resources~\cite{SMEFCOMP} further motivate a more flexible and
-dynamic data management.
-
-Together these factors imply that HL-LHC (and perhaps Run 3) will
+This may imply that HL-LHC (and perhaps Run 3) will
 require larger, potentially non-evolutionary, changes to the
 experiment's computing model, data management, access and organisation.
 To that end, a number of ideas and research questions have arisen
@@ -91,20 +63,10 @@ applied to building such a system?  What can be learned from
 commercial/general purpose cloud storage systems (e.g.\ Google
 Drive, DropBox) to evolve the existing data federation into a
 cost-effective, high performance global storage cloud for physics?
-Can application architectures such as Map-Reduce~\cite{MAPREDUCE}
-be integrated in the large into HEP computing models and what data
-management and organisation strategies would make it most effective?
-Today ``external'' entities monitor overall performance and act to
-optimise the system. Can performance-aware software applications
-adapt or work with the data access layer when performance is too
-low? Can CMS adapt its data model and software to simplify the
-problem, for example by a more dynamic definition and selection of
-datasets? How can HEP best exploit a hierarchy of cache storage
+How can HEP best exploit a hierarchy of cache storage
 from client side memory, through SSD's and disks to tape?  As the
 importance of the WAN is increased, are there specific technologies
-(beyond simple bandwidth increases) that can help?  Beyond the bulk
-challenge (data volumes and I/O rates), will the ``small'' end-user
-analysis data management scale by factors of O($10^3$)?
+(beyond simple bandwidth increases) that can help?
 
 \section{Computing Model Simulation}
 
