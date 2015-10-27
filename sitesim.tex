@@ -117,7 +117,7 @@ also remembers the original wall clock time required to run the job.
 
 \subsection{Information Sources}
 
-The simulation uses current system information to setup a complex and
+The simulation uses current system information to configure a complex and
 realistic experiment wide computing system. Site information can be
 extracted from the CMS
 \htmladdnormallink{SiteDB}{http://cmsweb.cern.ch/sitedb/}
@@ -129,7 +129,7 @@ addition, when only considering the CMS infrastructure in the US these
 numbers were extracted from
 \htmladdnormallink{REBUS}{http://wlcg-rebus.cern.ch/apps/pledges/resources/}.
 
-Once the sites are setup the links between them get setup then using
+Once the sites are configured the links between them are created using
 information extracted by a script from
 \htmladdnormallink{PhEDEx}{http://cmsweb.cern.ch/phedex/}. This
 provides a list of links between the sites. Each of those links can
@@ -167,7 +167,7 @@ relatively easy number to measure.
   \end{center}
 \end{table}
 
-Once sites and the links between them are setup the file size and
+Once sites and the links between them are ready the file size and
 location information are loaded. These have also been extracted from
 PhEDEx. The list of files required is found from the list of jobs to
 be run. When considering only US locations, files that are needed but
@@ -326,7 +326,9 @@ two in each direction.
         & 3.32 & 4.25 \\
         \hline
       \end{tabular}
-      \caption{Total wall clock time of all jobs in billions of seconds\label{tab:wallClock}}
+      \caption{Total wall clock time of all jobs in billions of seconds\label{tab:wallClock}.
+       "CPU Hit" is the penalty on CPU Efficiency when reading data remotely. "Max speed" is
+       the maximum speed a file can be transferred at.}
     \end{scriptsize}
   \end{center}
 \end{table}
@@ -530,12 +532,13 @@ parameters has been determines quantitative comparisons can be made.
 
 \section*{References}
 \begin{thebibliography}{9}
-\bibitem{CMSCTDR} Bayatyan G L et al,  CMS Computing Technical Design
-  Report, CERN Report CERN-LHCC-2005-023 (2005).
 
 \bibitem{HLLHC} Rossi L and Bruning O 2012 High Luminosity Large Hadron
   Collider - A description for the European Strategy Preparatory
   Group, CERN report CERN-ATS-2012-236
+
+\bibitem{CMSCTDR} Bayatyan G L et al,  CMS Computing Technical Design
+  Report, CERN Report CERN-LHCC-2005-023 (2005).
 
 \bibitem{PHEDEX} Rehn J et al 2006 PhEDEx high-throughput data
   transfer management system {\it Proceedings of Computing in High
